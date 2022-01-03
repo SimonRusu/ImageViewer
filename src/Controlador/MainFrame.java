@@ -1,5 +1,6 @@
 package Controlador;
 
+import Persistencia.ImageLoader;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,9 +18,10 @@ import UI.SwingImageDisplay;
 public class MainFrame extends JFrame {
     
     private ImageDisplay imageDisplay;
+    final private ImageLoader imageLoader;
     
-    public MainFrame() {
-        
+    public MainFrame(ImageLoader imageLoader) {
+        this.imageLoader = imageLoader;
         this.setTitle("Image Viewer");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(800,600);
@@ -49,7 +51,7 @@ public class MainFrame extends JFrame {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                imageDisplay.show(imageDisplay.current().prev());
+                imageDisplay.show(imageLoader.prev());
             }
         };
     }
@@ -64,7 +66,7 @@ public class MainFrame extends JFrame {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                imageDisplay.show(imageDisplay.current().next());
+                imageDisplay.show(imageLoader.next());
             }
         };
     } 
