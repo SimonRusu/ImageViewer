@@ -1,6 +1,8 @@
 package Persistencia;
 
 import Modelo.Image;
+import Modelo.ProxyImage;
+import Modelo.RealImage;
 import java.io.*;
 /**
  *
@@ -26,28 +28,17 @@ public class FileImageLoader implements ImageLoader {
         };
     }
     
+@Override
+public Image load() {
+
+    return new ProxyImage(files[current]) {
         @Override
-        public Image load() {
- 
+        public String name() {
+            return files[current].getName();
+        } 
+    };
+}
         
-        return new Image() {
-            @Override
-            public String name() {
-                return files[current].getName();
-            }
-
-            @Override
-            public InputStream stream() {
-                try {
-                    return new BufferedInputStream(new FileInputStream(files[current]));
-                } catch (FileNotFoundException e) {
-                    return null;
-                }
-            }
-
-        };
-    }
-
     @Override
     public Image next() {
         if (this.current == files.length -1) {
