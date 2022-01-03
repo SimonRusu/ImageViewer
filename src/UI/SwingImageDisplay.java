@@ -29,7 +29,9 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
 
     @Override
     public void paint(Graphics g) {
-        if (currentImage == null) return;
+        if (currentImage == null){       
+            return;
+        }
         g.drawImage(imageOf(currentImage),0,0,this.getWidth(),this.getHeight(),null);
     }
     
@@ -37,6 +39,7 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
         try {
             return ImageIO.read(image.stream());
         } catch (IOException e) {
+            
             e.printStackTrace();
             return null;
         }
